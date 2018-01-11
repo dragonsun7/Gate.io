@@ -58,7 +58,19 @@ func main() {
 			fmt.Println(err)
 		}
 
-		fmt.Println(tickersApi)
+		orderBookApi := new(ApiOrderBook).Init(pg, "btc_usdt")
+		err = ApiDo(orderBookApi)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		orderBooksApi := new(ApiOrderBooks).Init(pg)
+		err = ApiDo(orderBooksApi)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		//fmt.Println(orderBooksApi)
 
 
 
