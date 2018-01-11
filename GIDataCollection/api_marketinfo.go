@@ -1,7 +1,7 @@
 /*
 	交易市场订单参数
 	返回所有系统支持的交易市场的参数信息，包括交易费，最小下单量，价格精度等。
-	URL: http://data.gate.io/api2/1/marketinfo
+	http://data.gate.io/api2/1/marketinfo
 */
 
 package main
@@ -85,9 +85,12 @@ func (api *ApiMarketInfo) Parser(body []byte) (error) {
 		})
 
 	}, "pairs")
+	if err != nil {
+		return err
+	}
 
 	api.Pairs = pairs
-	return err
+	return nil
 }
 
 func (api *ApiMarketInfo) Save() (error) {

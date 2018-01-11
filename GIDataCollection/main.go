@@ -15,7 +15,6 @@ func main() {
 		log.Fatal(err.Error())
 	}
 	fmt.Println("成功！")
-	fmt.Println("")
 
 	//times := 1
 	//for true {
@@ -39,7 +38,14 @@ func main() {
 			fmt.Println(err)
 			//continue
 		}
-		fmt.Println(marketInfoApi)
+
+		markerListApi := new(ApiMarketList).Init(pg)
+		err = ApiDo(markerListApi)
+		if err != nil {
+			fmt.Println(err.Error())
+			//continue
+		}
+		//fmt.Println(markerListApi)
 
 	//	times++
 	//	fmt.Println("采集结束！")
