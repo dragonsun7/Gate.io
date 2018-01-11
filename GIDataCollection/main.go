@@ -42,10 +42,25 @@ func main() {
 		markerListApi := new(ApiMarketList).Init(pg)
 		err = ApiDo(markerListApi)
 		if err != nil {
-			fmt.Println(err.Error())
+			fmt.Println(err)
 			//continue
 		}
-		//fmt.Println(markerListApi)
+
+		tickerApi := new(ApiTicker).Init(pg, "btc_usdt")
+		err = ApiDo(tickerApi)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		tickersApi := new(ApiTickers).Init(pg)
+		err = ApiDo(tickersApi)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		fmt.Println(tickersApi)
+
+
 
 	//	times++
 	//	fmt.Println("采集结束！")

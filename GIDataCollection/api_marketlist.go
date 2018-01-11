@@ -10,7 +10,6 @@ import (
 	"github.com/buger/jsonparser"
 	"strconv"
 	"errors"
-	"fmt"
 	"strings"
 )
 
@@ -103,18 +102,7 @@ func (api *ApiMarketList) Save() (error) {
 	for _, item := range api.Data  {
 
 		// bs_pairs
-		sql := "SELECT COUNT(*) AS row_count FROM bs_pairs WHERE pair = $1"
-		dataSet, err := api.pg.Query(sql, item.Pair)
-		if err != nil {
-			return err
-		}
-
-		rowCount := dataSet[0]["row_count"].(int64)
-		if rowCount == 0 {
-			return errors.New("没有找到交易对：" + item.Pair)
-		}
-
-		sql = `
+		sql := `
 UPDATE
 	bs_pairs
 SET
@@ -129,10 +117,9 @@ SET
 WHERE 
 	pair = $9
 `
-		_, err = api.pg.Exec(sql, item.Symbol, item.Name, item.NameCn, item.NameEn, item.CurrA, item.CurrB, item.Supply,
+		_, err := api.pg.Exec(sql, item.Symbol, item.Name, item.NameCn, item.NameEn, item.CurrA, item.CurrB, item.Supply,
 			item.MarketCap, item.Pair)
 		if err != nil {
-			fmt.Println(item)
 			return err
 		}
 
@@ -158,17 +145,6 @@ WHERE
 		}
 
 		// tr_market
-		sql = "SELECT COUNT(*) AS row_count FROM tr_market WHERE pair = $1"
-		dataSet, err = api.pg.Query(sql, item.Pair)
-		if err != nil {
-			return err
-		}
-
-		rowCount = dataSet[0]["row_count"].(int64)
-		if rowCount == 0 {
-			return errors.New("没有找到交易对：" + item.Pair)
-		}
-
 		trend := 0
 		if item.Trend == "up" {
 			trend = 1
@@ -179,7 +155,6 @@ WHERE
 		sql = "UPDATE tr_market SET price = $1, vol_a = $2, vol_b = $3, percent = $4, trend = $5 WHERE pair = $6"
 		_, err = api.pg.Exec(sql, item.Price, item.VolA, item.VolB, item.Percent, trend, item.Pair)
 		if err != nil {
-			fmt.Println("x")
 			return err
 		}
 	}

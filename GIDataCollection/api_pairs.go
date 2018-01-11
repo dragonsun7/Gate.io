@@ -32,7 +32,6 @@ func (api *ApiPairs) Parser(body []byte) (error) {
 
 func (api *ApiPairs) Save() (error) {
 	for _, pair := range api.pairs {
-
 		// bs_pair
 		sql := "SELECT COUNT(*) AS row_count FROM bs_pairs WHERE pair = $1"
 		dataSet, err := api.pg.Query(sql, pair)

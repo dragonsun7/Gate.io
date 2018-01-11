@@ -95,19 +95,8 @@ func (api *ApiMarketInfo) Parser(body []byte) (error) {
 
 func (api *ApiMarketInfo) Save() (error) {
 	for _, pair := range api.Pairs {
-		sql := "SELECT COUNT(*) AS row_count FROM bs_pairs WHERE pair = $1"
-		dataSet, err := api.pg.Query(sql, pair.Pair)
-		if err != nil {
-			return err
-		}
-
-		rowCount := dataSet[0]["row_count"].(int64)
-		if rowCount == 0 {
-			return errors.New("没有找到交易对：" + pair.Pair)
-		}
-
-		sql = "UPDATE bs_pairs SET precision = $1, min_amount = $2, fee = $3 WHERE pair = $4"
-		_, err = api.pg.Exec(sql, pair.Info.Decimal, pair.Info.MinAmount, pair.Info.Fee, pair.Pair)
+		sql := "UPDATE bs_pairs SET precision = $1, min_amount = $2, fee = $3 WHERE pair = $4"
+		_, err := api.pg.Exec(sql, pair.Info.Decimal, pair.Info.MinAmount, pair.Info.Fee, pair.Pair)
 		if err != nil {
 			return err
 		}
