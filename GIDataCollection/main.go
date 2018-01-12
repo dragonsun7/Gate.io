@@ -25,53 +25,53 @@ func main() {
 	//
 	//	fmt.Println("采集数据...", times)
 
-		pairsApi := new(ApiPairs).Init(pg)
-		err = ApiDo(pairsApi)
+		//pairsApi := new(ApiPairs).Init(pg)
+		//err = ApiDo(pairsApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+		//
+		//marketInfoApi := new(ApiMarketInfo).Init(pg)
+		//err = ApiDo(marketInfoApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+		//
+		//markerListApi := new(ApiMarketList).Init(pg)
+		//err = ApiDo(markerListApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+		//
+		//tickerApi := new(ApiTicker).Init(pg, "btc_usdt")
+		//err = ApiDo(tickerApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+		//
+		//tickersApi := new(ApiTickers).Init(pg)
+		//err = ApiDo(tickersApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+		//
+		//orderBookApi := new(ApiOrderBook).Init(pg, "btc_usdt")
+		//err = ApiDo(orderBookApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+		//
+		//orderBooksApi := new(ApiOrderBooks).Init(pg)
+		//err = ApiDo(orderBooksApi)
+		//if err != nil {
+		//	fmt.Println(err)
+		//}
+
+		tradeHistoryApi := new(ApiTradeHistory).Init(pg, "btc_usdt", 0)
+		err = ApiDo(tradeHistoryApi)
 		if err != nil {
 			fmt.Println(err)
-			//continue
 		}
-
-		marketInfoApi := new(ApiMarketInfo).Init(pg)
-		err = ApiDo(marketInfoApi)
-		if err != nil {
-			fmt.Println(err)
-			//continue
-		}
-
-		markerListApi := new(ApiMarketList).Init(pg)
-		err = ApiDo(markerListApi)
-		if err != nil {
-			fmt.Println(err)
-			//continue
-		}
-
-		tickerApi := new(ApiTicker).Init(pg, "btc_usdt")
-		err = ApiDo(tickerApi)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		tickersApi := new(ApiTickers).Init(pg)
-		err = ApiDo(tickersApi)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		orderBookApi := new(ApiOrderBook).Init(pg, "btc_usdt")
-		err = ApiDo(orderBookApi)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		orderBooksApi := new(ApiOrderBooks).Init(pg)
-		err = ApiDo(orderBooksApi)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		//fmt.Println(orderBooksApi)
-
 
 
 	//	times++
